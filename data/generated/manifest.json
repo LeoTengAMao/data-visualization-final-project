@@ -1,0 +1,627 @@
+{
+  "revision": "e4f981e5cb03c1fe33d436b1ee8e1197fbb0af84",
+  "generated_at": "2026-11-16T02:38:42.117949+00:00",
+  "source": "https://github.com/PokeAPI/pokeapi.git",
+  "tables": {
+    "pokemon": {
+      "rows": 1351,
+      "columns": [
+        "id",
+        "identifier",
+        "species_id",
+        "height",
+        "weight",
+        "base_experience",
+        "order",
+        "is_default"
+      ],
+      "sha256": "eb8a7f59134bf3763a0f3072a7794cb097413e6f6027c380a92dd8d63082ab80"
+    },
+    "pokemon_species": {
+      "rows": 1025,
+      "columns": [
+        "id",
+        "identifier",
+        "generation_id",
+        "evolves_from_species_id",
+        "evolution_chain_id",
+        "color_id",
+        "shape_id",
+        "habitat_id",
+        "gender_rate",
+        "capture_rate",
+        "base_happiness",
+        "is_baby",
+        "hatch_counter",
+        "has_gender_differences",
+        "growth_rate_id",
+        "forms_switchable",
+        "is_legendary",
+        "is_mythical",
+        "order",
+        "conquest_order"
+      ],
+      "sha256": "e66e2eeb25fd3836b0ebab6bf87bbf01960aa3c0555e2bac495fa8393c5e0c45"
+    },
+    "pokemon_species_names": {
+      "rows": 12300,
+      "columns": [
+        "pokemon_species_id",
+        "local_language_id",
+        "name",
+        "genus"
+      ],
+      "sha256": "5a86cc021d01109949999e7fa1459414221ba8918469151251e33ffa19eeb88c"
+    },
+    "pokemon_stats": {
+      "rows": 8106,
+      "columns": [
+        "pokemon_id",
+        "stat_id",
+        "base_stat",
+        "effort"
+      ],
+      "sha256": "fa2c44263a3706468682fefc3e0b3c4f5487fe9febed7d4ebcd6939c34b16aa8"
+    },
+    "pokemon_types": {
+      "rows": 2116,
+      "columns": [
+        "pokemon_id",
+        "type_id",
+        "slot"
+      ],
+      "sha256": "f1fc4bfd657a034ea3bf6972423b10276424aa068577b304a78a08996425ba05"
+    },
+    "pokemon_abilities": {
+      "rows": 2943,
+      "columns": [
+        "pokemon_id",
+        "ability_id",
+        "is_hidden",
+        "slot"
+      ],
+      "sha256": "4a79ee53d386a8ad3a89657483ddfd31594e05a5d52400fe131e5e4dfd7ec04a"
+    },
+    "pokemon_moves": {
+      "rows": 638321,
+      "columns": [
+        "pokemon_id",
+        "version_group_id",
+        "move_id",
+        "pokemon_move_method_id",
+        "level",
+        "order",
+        "mastery"
+      ],
+      "sha256": "22a807cef26891eeac0d0c900bd363e66baf421f7ee795bc7bc3e718f23b939e"
+    },
+    "moves": {
+      "rows": 937,
+      "columns": [
+        "id",
+        "identifier",
+        "generation_id",
+        "type_id",
+        "power",
+        "pp",
+        "accuracy",
+        "priority",
+        "target_id",
+        "damage_class_id",
+        "effect_id",
+        "effect_chance",
+        "contest_type_id",
+        "contest_effect_id",
+        "super_contest_effect_id"
+      ],
+      "sha256": "8aafd37bf78f19471495c05b201545180f50f0a08a2a2a844d69f9837dd39ac9"
+    },
+    "types": {
+      "rows": 21,
+      "columns": [
+        "id",
+        "identifier",
+        "generation_id",
+        "damage_class_id"
+      ],
+      "sha256": "37f039c8d722f47d51ba1c5c5ecf9b7007235b1a9a1af2827645c777b70307c8"
+    },
+    "type_efficacy": {
+      "rows": 324,
+      "columns": [
+        "damage_type_id",
+        "target_type_id",
+        "damage_factor"
+      ],
+      "sha256": "cdd7de4066680414d0a2433af805f139f425d6350cbf998ecab559a0fe8ff587"
+    },
+    "stats": {
+      "rows": 9,
+      "columns": [
+        "id",
+        "damage_class_id",
+        "identifier",
+        "is_battle_only",
+        "game_index"
+      ],
+      "sha256": "ee8c541b45b64f40f0eb2545c767294b5801ce8a1410e19d8c33a54e6f1c3b9c"
+    },
+    "abilities": {
+      "rows": 374,
+      "columns": [
+        "id",
+        "identifier",
+        "generation_id",
+        "is_main_series"
+      ],
+      "sha256": "74c3588ad48e08e54ff01f432899a4028c3e91508bbd53201df85e1f6b9e9ef3"
+    },
+    "pokemon_evolution": {
+      "rows": 676,
+      "columns": [
+        "id",
+        "evolved_species_id",
+        "evolution_trigger_id",
+        "version_group_id",
+        "is_default",
+        "trigger_item_id",
+        "minimum_level",
+        "gender_id",
+        "location_id",
+        "held_item_id",
+        "time_of_day",
+        "known_move_id",
+        "known_move_type_id",
+        "minimum_happiness",
+        "minimum_beauty",
+        "minimum_affection",
+        "relative_physical_stats",
+        "party_species_id",
+        "party_type_id",
+        "trade_species_id",
+        "needs_overworld_rain",
+        "turn_upside_down",
+        "needs_multiplayer",
+        "near_special_rock",
+        "region_id",
+        "required_pokemon_form_id",
+        "evolved_pokemon_form_id",
+        "used_move_id",
+        "minimum_move_count",
+        "minimum_steps",
+        "minimum_damage_taken",
+        "nature_bitmask",
+        "condition_expression",
+        "percentage_chance"
+      ],
+      "sha256": "e78be51c8805551fffccd5551a556e752e4a76ff1b52482b53b409dd3882e1dd"
+    },
+    "pokemon_egg_groups": {
+      "rows": 1304,
+      "columns": [
+        "species_id",
+        "egg_group_id"
+      ],
+      "sha256": "a49e707ed5eb26fd27233ce2699ae336ca1c445b66b02fd653e9a06fee9e3c5a"
+    },
+    "egg_groups": {
+      "rows": 15,
+      "columns": [
+        "id",
+        "identifier"
+      ],
+      "sha256": "71c825ac27eab7a08d8d42d2c9726276f167e3f6a22d4747598c6838c8d9680e"
+    },
+    "items": {
+      "rows": 2223,
+      "columns": [
+        "id",
+        "identifier",
+        "category_id",
+        "cost",
+        "fling_power",
+        "fling_effect_id"
+      ],
+      "sha256": "f08cd6dc30b447cb91cbe9232c79052e8521f32f6105bb1489b5bfabf4ca3241"
+    },
+    "versions": {
+      "rows": 53,
+      "columns": [
+        "id",
+        "version_group_id",
+        "identifier"
+      ],
+      "sha256": "70083465865a6a69a9aad2be3fc3915078c6ff740f14a090b1367d8ec9cfc3cd"
+    },
+    "version_groups": {
+      "rows": 32,
+      "columns": [
+        "id",
+        "identifier",
+        "generation_id",
+        "order"
+      ],
+      "sha256": "28da8d89d8eb4966941f81a9e62b3990510ed4d76dd774158246551a8e7707a7"
+    },
+    "pokemon_forms": {
+      "rows": 1579,
+      "columns": [
+        "id",
+        "identifier",
+        "form_identifier",
+        "pokemon_id",
+        "introduced_in_version_group_id",
+        "is_default",
+        "is_battle_only",
+        "is_mega",
+        "form_order",
+        "order"
+      ],
+      "sha256": "99bf8f7ad4dc1f2e291357a090cef6a575623ec3cbf9030d0e33656e6e608ae2"
+    },
+    "pokemon_form_names": {
+      "rows": 4935,
+      "columns": [
+        "pokemon_form_id",
+        "local_language_id",
+        "form_name",
+        "pokemon_name"
+      ],
+      "sha256": "a24fb943ac39876375ad5c53f3305fd4a6ccb7afacc91ab192579bb50c28f1d1"
+    },
+    "pokemon_types_past": {
+      "rows": 36,
+      "columns": [
+        "pokemon_id",
+        "generation_id",
+        "type_id",
+        "slot"
+      ],
+      "sha256": "02553c38e3871f99c7ed809b944066fea3f42ef6bccd4daba19274aca01fbff0"
+    },
+    "pokemon_stats_past": {
+      "rows": 235,
+      "columns": [
+        "pokemon_id",
+        "generation_id",
+        "stat_id",
+        "base_stat",
+        "effort"
+      ],
+      "sha256": "0a074d9581369c1df13d8d4f4015fd7215b896c5dfb58107f3b529f7156950d2"
+    },
+    "type_efficacy_past": {
+      "rows": 6,
+      "columns": [
+        "damage_type_id",
+        "target_type_id",
+        "damage_factor",
+        "generation_id"
+      ],
+      "sha256": "0d8cb1251c7f987c7978d77d6c1b9ecfc54e04474b7584b8ecf96fef498fb9d4"
+    },
+    "pokemon_abilities_past": {
+      "rows": 569,
+      "columns": [
+        "pokemon_id",
+        "generation_id",
+        "ability_id",
+        "is_hidden",
+        "slot"
+      ],
+      "sha256": "cc77c6d85f8323f5f52047d45671140309d19ec0eb0e5e610b68971dc9c64e02"
+    },
+    "languages": {
+      "rows": 14,
+      "columns": [
+        "id",
+        "iso639",
+        "iso3166",
+        "identifier",
+        "official",
+        "order"
+      ],
+      "sha256": "fbb60019a6a461783d5671a995d5f590db61792a273e90faa0ed630d102a19b8"
+    },
+    "type_names": {
+      "rows": 230,
+      "columns": [
+        "type_id",
+        "local_language_id",
+        "name"
+      ],
+      "sha256": "685230c51074cf2f723debcf827a4df4c36ab0ec7e929c806ad65a3e40958705"
+    },
+    "move_names": {
+      "rows": 10235,
+      "columns": [
+        "move_id",
+        "local_language_id",
+        "name"
+      ],
+      "sha256": "230c3cf93ea08441c660cc0470613ffc30e94bdb184c9ac12bdb4fc5ebdb37e8"
+    },
+    "move_meta": {
+      "rows": 827,
+      "columns": [
+        "move_id",
+        "meta_category_id",
+        "meta_ailment_id",
+        "min_hits",
+        "max_hits",
+        "min_turns",
+        "max_turns",
+        "drain",
+        "healing",
+        "crit_rate",
+        "ailment_chance",
+        "flinch_chance",
+        "stat_chance"
+      ],
+      "sha256": "93b92d5bddf4fc1536ca0a647c20453bf92e6389010f33ca6fc4c5e9c54363be"
+    },
+    "move_damage_classes": {
+      "rows": 3,
+      "columns": [
+        "id",
+        "identifier"
+      ],
+      "sha256": "b7101ceca4dff152537a2fb5c439ca4030b05f86442c643812c0b7b6ccf16f1b"
+    },
+    "move_effect_prose": {
+      "rows": 872,
+      "columns": [
+        "move_effect_id",
+        "local_language_id",
+        "short_effect",
+        "effect"
+      ],
+      "sha256": "f6d9bf0d28433a010a8b8b6a0a14d1ef72fbfcb997717f71b0e34483b7ee9697"
+    },
+    "pokemon_move_methods": {
+      "rows": 12,
+      "columns": [
+        "id",
+        "identifier"
+      ],
+      "sha256": "78b75acfcf6dca4c82da9d4851357cbbd65e61b08154eddfc2ace0efd00e408e"
+    },
+    "move_changelog": {
+      "rows": 198,
+      "columns": [
+        "move_id",
+        "changed_in_version_group_id",
+        "type_id",
+        "power",
+        "pp",
+        "accuracy",
+        "priority",
+        "target_id",
+        "effect_id",
+        "effect_chance"
+      ],
+      "sha256": "86c1511f6a0e29dcc5a885c5b8f125ffd502afbec9f69c7f2b85a3e0e8b001f8"
+    },
+    "evolution_chains": {
+      "rows": 540,
+      "columns": [
+        "id",
+        "baby_trigger_item_id"
+      ],
+      "sha256": "5159f0481eaa786f2b08e58356bcc6271e0982dceeb69746aaac4637d5a47125"
+    },
+    "evolution_triggers": {
+      "rows": 18,
+      "columns": [
+        "id",
+        "identifier"
+      ],
+      "sha256": "fb4b055fdb022eab3110147de669ae243c5497559257ad1f370c929ab6309a8c"
+    },
+    "item_names": {
+      "rows": 23558,
+      "columns": [
+        "item_id",
+        "local_language_id",
+        "name"
+      ],
+      "sha256": "26a46cb2e0a9e47e7a17115b9cce8b30d23f24d616f9c2aa44cbe7d8e0dea5c2"
+    },
+    "item_prose": {
+      "rows": 1910,
+      "columns": [
+        "item_id",
+        "local_language_id",
+        "short_effect",
+        "effect"
+      ],
+      "sha256": "510fc4a9e58951dcaacf156d4cc6655dce1b173dcaea45495a29f6f343076373"
+    },
+    "item_categories": {
+      "rows": 54,
+      "columns": [
+        "id",
+        "pocket_id",
+        "identifier"
+      ],
+      "sha256": "8bfcaaf1dfe45d33a8cc374a602f2424e1c37ad68bab222f090cd95c691660d7"
+    },
+    "item_flavor_text": {
+      "rows": 57507,
+      "columns": [
+        "item_id",
+        "version_group_id",
+        "language_id",
+        "flavor_text"
+      ],
+      "sha256": "f85281c97e4a423fb6ae673a3d2cfab116ac2e7bb9fcdecfb43ac8b1e1fb8676"
+    },
+    "pokemon_items": {
+      "rows": 5448,
+      "columns": [
+        "pokemon_id",
+        "version_id",
+        "item_id",
+        "rarity"
+      ],
+      "sha256": "c58e513aeaa6c6938c701ad8038936663bd4b7b28dc9dda5e2aa8a05ebc8b379"
+    },
+    "locations": {
+      "rows": 1104,
+      "columns": [
+        "id",
+        "region_id",
+        "identifier"
+      ],
+      "sha256": "2af5d6a1151d5ae402f9da1d5513bc1c7437795e69b140787c7aab3f6ed7eaa3"
+    },
+    "location_names": {
+      "rows": 5252,
+      "columns": [
+        "location_id",
+        "local_language_id",
+        "name",
+        "subtitle"
+      ],
+      "sha256": "4f901da13ab1fcd4cfeee99dd653652c2bd10afe21739f47a99ee906a99a004e"
+    },
+    "location_areas": {
+      "rows": 1540,
+      "columns": [
+        "id",
+        "location_id",
+        "game_index",
+        "identifier"
+      ],
+      "sha256": "3c4120c4e7b40006afe80d6f3995aba4c74757ae7f0c815df533819d526f0362"
+    },
+    "location_area_prose": {
+      "rows": 3211,
+      "columns": [
+        "location_area_id",
+        "local_language_id",
+        "name"
+      ],
+      "sha256": "e9856e9a88dd2fabfb641f417e514e3f1299d07c475dc343266787dfda3e9cc1"
+    },
+    "encounters": {
+      "rows": 117137,
+      "columns": [
+        "id",
+        "version_id",
+        "location_area_id",
+        "encounter_slot_id",
+        "pokemon_id",
+        "min_level",
+        "max_level"
+      ],
+      "sha256": "4d5ce7dc750c0497feeb767aff4536f76a3c3178e6ea13e215df8cc4a44406e4"
+    },
+    "encounter_slots": {
+      "rows": 3810,
+      "columns": [
+        "id",
+        "version_group_id",
+        "encounter_method_id",
+        "slot",
+        "rarity"
+      ],
+      "sha256": "b9c4a70603604bcd977f25c2944048b0c87148f7e6fb2ef3bc82c350eb9ddb9a"
+    },
+    "encounter_methods": {
+      "rows": 66,
+      "columns": [
+        "id",
+        "identifier",
+        "order"
+      ],
+      "sha256": "99327ac41c463b8bcca18d04b56cad3d5532fec70dd7eb869b9ca650a007e291"
+    },
+    "encounter_conditions": {
+      "rows": 30,
+      "columns": [
+        "id",
+        "identifier"
+      ],
+      "sha256": "489a58710644df3daef44e86227fba98ecfe9fc4349e86901997f9d9b20c8a18"
+    },
+    "encounter_condition_values": {
+      "rows": 363,
+      "columns": [
+        "id",
+        "encounter_condition_id",
+        "identifier",
+        "is_default"
+      ],
+      "sha256": "b78fd7d1aab6f6b171bc47c03b9cd3ed93bc2ffd41c24e95beb6f737a52aa124"
+    },
+    "encounter_condition_value_map": {
+      "rows": 112044,
+      "columns": [
+        "encounter_id",
+        "encounter_condition_value_id"
+      ],
+      "sha256": "e74c3ddc625305974a3df919adeb4510fb59fcb9186bb895f767bd6000d83093"
+    },
+    "generations": {
+      "rows": 9,
+      "columns": [
+        "id",
+        "main_region_id",
+        "identifier"
+      ],
+      "sha256": "d39634465251f1334aa0389b5adc4b4f2754eaec61f305fceb9432a3d4c96748"
+    },
+    "natures": {
+      "rows": 25,
+      "columns": [
+        "id",
+        "identifier",
+        "decreased_stat_id",
+        "increased_stat_id",
+        "hates_flavor_id",
+        "likes_flavor_id",
+        "game_index"
+      ],
+      "sha256": "3536990f6adeaa1735551a6afe798649d22426e161c937da09d3ae9a5381309c"
+    },
+    "machines": {
+      "rows": 2372,
+      "columns": [
+        "machine_number",
+        "version_group_id",
+        "item_id",
+        "move_id"
+      ],
+      "sha256": "f9df7faaf0a60896fa344abd2b639f83f79c2a24e1fd4bb3560ca7da76e9a6ad"
+    },
+    "regions": {
+      "rows": 11,
+      "columns": [
+        "id",
+        "identifier"
+      ],
+      "sha256": "dbd1ecc3f014b67c1a9452611fca5d13542ebc3524f3a4188b5a6cb1ca911d79"
+    },
+    "pokemon_dex_numbers": {
+      "rows": 8010,
+      "columns": [
+        "species_id",
+        "pokedex_id",
+        "pokedex_number"
+      ],
+      "sha256": "b8fe3353eec2b0ba4fc37e07e94ffa9f33ce96a7f9856c643a18b3ad518cd393"
+    },
+    "pokedexes": {
+      "rows": 35,
+      "columns": [
+        "id",
+        "region_id",
+        "identifier",
+        "is_main_series"
+      ],
+      "sha256": "aa6570e15092f80750431a59a8712410cc114d74ffffb75b3334df64b33b3d07"
+    }
+  },
+  "missing_optional": []
+}

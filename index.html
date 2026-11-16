@@ -1,0 +1,24 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Pokémon VisualDex</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <header><h1>Pokémon VisualDex</h1><p>離線寶可夢視覺分析工具｜開發骨架</p></header>
+  <main>
+    <section class="panel"><h2>資料準備狀態</h2><p id="status" role="status">檢查資料中…</p>
+      <p id="dataset"></p><label for="pokemon">測試寶可夢：</label> <select id="pokemon" disabled></select><div id="chart"></div>
+    </section>
+    <section class="panel"><h2>分析模組</h2><div id="modules" class="modules"></div></section>
+  </main>
+  <script src="vendor/d3.min.js"></script>
+  <script src="data/generated/pokemon-data.js"></script>
+  <script src="js/core/data.js"></script>
+  <script src="js/core/state.js"></script>
+  <script src="js/modules/registry.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>

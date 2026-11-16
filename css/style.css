@@ -1,0 +1,12 @@
+* { box-sizing: border-box; }
+body { margin: 0; font-family: system-ui, 'Microsoft JhengHei', sans-serif; background: #f5f7fa; color: #203047; }
+header { background: #18364d; color: white; padding: 24px max(24px, calc((100vw - 1080px)/2)); }
+h1, h2 { margin: 0 0 10px; }
+header p { margin: 0; }
+main { max-width: 1120px; margin: 20px auto; padding: 0 20px; }
+.panel { border: 1px solid #d9e3eb; background: white; border-radius: 10px; padding: 20px; margin-bottom: 18px; }
+.modules { display: grid; grid-template-columns: repeat(auto-fit, minmax(235px, 1fr)); gap: 12px; }
+.module { border: 1px solid #dce4ec; padding: 14px; border-radius: 8px; }
+.module span { display: block; color: #64748b; font-size: 13px; margin-top: 6px; }
+#chart svg { max-width: 100%; height: auto; }
+select { padding: 6px; max-width: 100%; }
