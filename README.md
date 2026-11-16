@@ -30,10 +30,7 @@ JavaScript 統一以 `VisualDex.pokemonImagePath(pokemon.id, false)` 或 `Visual
 
 ## 四人實作分工
 
-- A：AC1、AC4；能力及進化分析。
-- B：AC2、AC3、AC9；招式、隊伍配置及攜帶物分析。
-- C：AC5、AC6；蛋招式與色違取得策略。
-- D：AC7、AC8；道館、捕捉及 EV 訓練。
+-代訂
 
 新增模組 JS 至 `js/modules/`，各自使用分支開發，整合時統一使用 `js/core/data.js` 的 `VisualDex.table(name)` 與 `js/core/state.js` 的共享狀態。`app.js` 目前只是一個測試頁面。
 
