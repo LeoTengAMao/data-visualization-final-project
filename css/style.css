@@ -10,3 +10,8 @@ main { max-width: 1120px; margin: 20px auto; padding: 0 20px; }
 .module span { display: block; color: #64748b; font-size: 13px; margin-top: 6px; }
 #chart svg { max-width: 100%; height: auto; }
 select { padding: 6px; max-width: 100%; }
+.pokemon-preview { display: grid; grid-template-columns: minmax(150px, 220px) minmax(0,1fr); gap: 18px; align-items: center; margin-top: 12px; }
+.image-preview { text-align: center; min-height: 160px; display: flex; flex-direction: column; align-items: center; justify-content: center; }
+#pokemon-image { width: 100%; max-width: 220px; object-fit: contain; }
+#image-status { color: #64748b; font-size: 13px; }
+@media (max-width: 600px) { .pokemon-preview { grid-template-columns: 1fr; } }

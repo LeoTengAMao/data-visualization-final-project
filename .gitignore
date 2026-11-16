@@ -3,4 +3,6 @@ __pycache__/
 *.part
 *.tmp
 data/raw/pokeapi/*.csv
+assets/images/pokemon/
+assets/images/items/
 .DS_Store

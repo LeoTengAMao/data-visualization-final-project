@@ -1,10 +1,12 @@
-"""Download a pinned PokéAPI CSV snapshot and D3, then build an offline JS bundle."""
+"""Download PokéAPI CSV, D3 and image resources for a fully offline VisualDex."""
 import argparse
 import csv
 import hashlib
 import json
+import shutil
 import subprocess
 import sys
+import tempfile
 from datetime import datetime, timezone
 from pathlib import Path
 from urllib.request import Request, urlopen
@@ -15,7 +17,9 @@ ROOT = Path(__file__).resolve().parents[1]
 RAW = ROOT / 'data/raw/pokeapi'
 GENERATED = ROOT / 'data/generated'
 VENDOR = ROOT / 'vendor'
+IMAGES = ROOT / 'assets/images'
 REPO = 'https://github.com/PokeAPI/pokeapi.git'
+SPRITES_REPO = 'https://github.com/PokeAPI/sprites.git'
 D3 = 'https://cdn.jsdelivr.net/npm/d3@7.9.0/'
 REQUIRED = (
     'pokemon', 'pokemon_species', 'pokemon_species_names', 'pokemon_stats',
@@ -50,6 +54,62 @@ def snapshot_revision():
     if len(revision) != 40: raise ValueError('Cannot resolve PokéAPI commit')
     return revision
 
+def copy_sprite_files(repo, destination):
+    sources = (
+        ('sprites/pokemon/other/official-artwork', 'pokemon'),
+        ('sprites/items', 'items'),
+    )
+    records = []
+    for source, target in sources:
+        src = repo / source
+        files = sorted(src.rglob('*.png'))
+        if not files:
+            raise ValueError(f'No PNG files found in {src}')
+        for file in files:
+            rel = Path(target) / file.relative_to(src)
+            output = destination / rel
+            output.parent.mkdir(parents=True, exist_ok=True)
+            # Preserve custom/local images instead of overwriting them.
+            if not output.is_file() or output.stat().st_size == 0:
+                part = output.with_name(output.name + '.part')
+                shutil.copy2(file, part)
+                part.replace(output)
+            records.append({'path': rel.as_posix(), 'bytes': output.stat().st_size})
+    return records
+
+def download_images(destination):
+    destination.mkdir(parents=True, exist_ok=True)
+    manifest_path = destination / 'sprites-manifest.json'
+    previous = None
+    if manifest_path.is_file():
+        try:
+            previous = json.loads(manifest_path.read_text(encoding='utf-8'))
+            files = previous.get('files', [])
+            if files and all((destination / f['path']).is_file() and (destination / f['path']).stat().st_size == f['bytes'] for f in files):
+                print(f'Images already prepared: {len(files)} PNG files'); return
+        except (OSError, ValueError, KeyError, TypeError):
+            previous = None
+    print('Downloading PokéAPI images (first download may take a while)...', flush=True)
+    with tempfile.TemporaryDirectory(prefix='visualdex-sprites-') as temp:
+        repo = Path(temp) / 'sprites'
+        subprocess.run(['git','clone','--depth','1','--filter=blob:none','--sparse',SPRITES_REPO,str(repo)],check=True,timeout=900)
+        # Recover an earlier snapshot when re-downloading missing images.
+        old_revision = previous.get('revision') if isinstance(previous, dict) else None
+        if old_revision and len(old_revision) == 40 and all(c in '0123456789abcdef' for c in old_revision):
+            subprocess.run(['git','-C',str(repo),'fetch','--depth','1','origin',old_revision],check=True,timeout=900)
+            subprocess.run(['git','-C',str(repo),'checkout','--detach',old_revision],check=True,timeout=900)
+        subprocess.run(['git','-C',str(repo),'sparse-checkout','set','sprites/pokemon/other/official-artwork','sprites/items'],check=True,timeout=1800)
+        revision = subprocess.check_output(['git','-C',str(repo),'rev-parse','HEAD'],text=True).strip()
+        files = copy_sprite_files(repo,destination)
+    counts = {
+        'pokemon': sum(f['path'].startswith('pokemon/') and not f['path'].startswith('pokemon/shiny/') for f in files),
+        'shiny': sum(f['path'].startswith('pokemon/shiny/') for f in files),
+        'items': sum(f['path'].startswith('items/') for f in files),
+    }
+    manifest = {'source': SPRITES_REPO,'revision': revision,'generated_at': datetime.now(timezone.utc).isoformat(),'counts':counts,'files':files}
+    tmp = manifest_path.with_suffix('.tmp'); tmp.write_text(json.dumps(manifest,indent=2),encoding='utf-8'); tmp.replace(manifest_path)
+    print('Images ready:', counts)
+
 def package(raw, generated, revision):
     tables = {}; records = {}; missing=[]
     for key in REQUIRED + OPTIONAL:
@@ -74,7 +134,14 @@ def package(raw, generated, revision):
     print(f'OK: {len(tables)} tables, {target.stat().st_size/1024/1024:.2f} MiB. Missing optional: {missing}')
 
 def main():
-    parser=argparse.ArgumentParser(); parser.add_argument('--build-only',action='store_true',help='Use already downloaded CSV files; no network'); args=parser.parse_args()
+    parser=argparse.ArgumentParser()
+    mode=parser.add_mutually_exclusive_group()
+    mode.add_argument('--build-only',action='store_true',help='Use already downloaded CSV files; no network')
+    mode.add_argument('--images-only',action='store_true',help='Download images only; keep existing data untouched')
+    mode.add_argument('--skip-images',action='store_true',help='Download CSV and D3 only')
+    args=parser.parse_args()
+    if args.images_only:
+        download_images(IMAGES); return
     for path in (RAW, GENERATED, VENDOR): path.mkdir(parents=True,exist_ok=True)
     revfile=RAW/'revision.txt'
     if args.build_only:
@@ -94,6 +161,8 @@ def main():
         download(D3+'dist/d3.min.js',VENDOR/'d3.min.js')
         download(D3+'LICENSE',VENDOR/'D3-LICENSE.txt')
     package(RAW,GENERATED,revision)
+    if not args.build_only and not args.skip_images:
+        download_images(IMAGES)
 
 if __name__=='__main__':
     try: main()

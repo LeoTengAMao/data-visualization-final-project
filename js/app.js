@@ -1,6 +1,9 @@
 (() => {
   const status = document.querySelector('#status');
   const picker = document.querySelector('#pokemon');
+  const shiny = document.querySelector('#shiny');
+  const pokemonImage = document.querySelector('#pokemon-image');
+  const imageStatus = document.querySelector('#image-status');
   for (const [id, title, file] of VisualDex.modules) {
     const card = document.createElement('div'); card.className = 'module';
     const h = document.createElement('strong'); h.textContent = `${id} ${title}`;
@@ -21,9 +24,20 @@
     const opt = document.createElement('option'); opt.value = p.id; opt.textContent = `${p.species_id} ${names.get(p.species_id) || p.identifier}`; picker.append(opt);
   }
   picker.disabled = false;
+  shiny.disabled = false;
+  pokemonImage.addEventListener('load', () => { pokemonImage.hidden = false; imageStatus.textContent = ''; });
+  pokemonImage.addEventListener('error', () => { pokemonImage.hidden = true; imageStatus.textContent = '此型態的圖片尚未收錄或未下載。'; });
+  function updateImage() {
+    if (!picker.value) return;
+    pokemonImage.hidden = true;
+    imageStatus.textContent = '載入圖片…';
+    pokemonImage.alt = `${picker.selectedOptions[0]?.textContent || '寶可夢'}${shiny.checked ? '（色違）' : ''}`;
+    pokemonImage.src = VisualDex.pokemonImagePath(picker.value, shiny.checked);
+  }
   function render() {
     const id = Number(picker.value);
     VisualDex.setState({pokemon_id: id});
+    updateImage();
     const data = stats.filter(d => d.pokemon_id === id && statNames.has(d.stat_id));
     const target = d3.select('#chart'); target.selectAll('*').remove();
     const svg = target.append('svg').attr('viewBox','0 0 650 230').attr('role','img').attr('aria-label','基礎種族值示範');
@@ -34,4 +48,5 @@
     svg.selectAll('.value').data(data).join('text').attr('class','value').attr('x',d=>73+x(d.base_stat)).attr('y',d=>y(statNames.get(d.stat_id))+y.bandwidth()/2).attr('dominant-baseline','middle').text(d=>d.base_stat);
   }
   picker.addEventListener('change',render); if(picker.options.length) render();
+  shiny.addEventListener('change',updateImage);
 })();
